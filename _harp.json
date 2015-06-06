@@ -1,8 +1,8 @@
 {
   "globals" : {
-    "site_name"   : "A Harp boilerplate",
-    "site_description" : "A boilerplate to get you setup harp-ing quickly!",
-    "site_keywords"    : "boilerplate?", 
+    "site_name"   : "Perseus",
+    "site_description" : "",
+    "site_keywords"    : "", 
     "facebook_meta"    : {
       "type"        : "",
       "image"       : ""

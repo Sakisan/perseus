@@ -1,7 +1,30 @@
-//- Do note that _data.json is meant for meta data only.
-//- When using the slug, each post should be built within /posts/ with a 
-//-   filename that matches the slug name.
-
-each post, slug in posts
-  h1= post.title
-  p= post.post
+video#achtergrond.layer(src="video/achtergrond.ogg" autoplay loop)
+.layer
+  img#hoofd(src="img/hoofd_800.gif")
+#medals.layer.l-container
+ .l-row
+   .l-col.span3
+     img.text.hidden(src="img/applause.png")
+     img.medal(src="img/medaille.gif")
+   .l-col.span6
+     p
+   .l-col.span3
+     img.text.hidden(src="img/fatherlove.png")
+     img.medal(src="img/medaille.gif")
+  .l-row
+    .l-col.span3
+      img.text.hidden(src="img/horseproblems.png")
+      img.medal(src="img/giphy--hands.gif")
+    .l-col.span6
+      p
+    .l-col.span3
+      img.text.hidden(src="img/medussssa.png")
+      img.medal(src="img/giphy--hands.gif")
+ .l-row
+   .l-col.span3
+     img(src="img/medaille.gif")
+   .l-col.span6
+     p
+   .l-col.span3
+     img.text.hidden(src="img/prettythings.png")
+     img.medal(src="img/medaille.gif")
