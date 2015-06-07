@@ -21,14 +21,30 @@ $(document).ready ->
     video.css('-webkit-transform','scaleY('+scale+')')
     video.css('-moz-transform','scaleY('+scale+')')
 
-  # medals
+  # audio fragments
+  youwin = new Audio "audio/You win sound effect 5.mp3"
+  tada = new Audio "audio/177120__rdholder__2dogsound-tadaa1-3s-2013jan31-cc-by-30-us.wav"
+  achievement = new Audio "audio/270404__littlerobotsoundfactory__jingle-achievement-00.wav"
+  game = new Audio "audio/220184__gameaudio__win-spacey.wav"
+
+  # interactie
+  applause = $('#applause')
+  applause.click ->
+    applause.addClass('hidden')
+
+  # medals click events
   medal_containers = $('#medals').find('.l-col')
   for medal_container in medal_containers
+    # alles
     medal = $(medal_container).find('img.medal')
     text = $(medal_container).find('img.text')
     text.click ->
       crown = $(this).parent().find('img.crown')
       crown.removeClass('hidden')
+      remove_goleft = -> crown.removeClass('goleft')
+      add_goleft = -> crown.addClass('goleft')
+      setTimeout add_goleft, 1000
+      setTimeout remove_goleft, 4000
     medal.hover ->
       text = $(this).parent().find('img.text')
       text.removeClass('hidden')
@@ -39,3 +55,20 @@ $(document).ready ->
       $(this).addClass('hidden')
       text = $(this).parent().find('img.text')
       text.addClass('hidden')
+
+    # per medal
+    if medal.hasClass('youwin')
+      text.click ->
+        youwin.play()
+    if medal.hasClass('tada')
+      text.click ->
+        tada.play()
+    if medal.hasClass('achievement')
+      text.click ->
+        achievement.play()
+    if medal.hasClass('game')
+      text.click ->
+        game.play()
+    if medal.hasClass('applause')
+      text.click ->
+        applause.removeClass('hidden')
