@@ -25,13 +25,17 @@ $(document).ready ->
   medal_containers = $('#medals').find('.l-col')
   for medal_container in medal_containers
     medal = $(medal_container).find('img.medal')
-    medal.click ->
-      text = $(this).parent().find('img.text')
-      text.removeClass('hidden')
-      # $(this).addClass('absolute')
-
     text = $(medal_container).find('img.text')
     text.click ->
-      medal = $(this).parent().find('img.medal')
+      crown = $(this).parent().find('img.crown')
+      crown.removeClass('hidden')
+    medal.hover ->
+      text = $(this).parent().find('img.text')
+      text.removeClass('hidden')
+    text.mouseout ->
       $(this).addClass('hidden')
-      # medal.removeClass('absolute')
+    crown  = $(medal_container).find('img.crown')
+    crown.click ->
+      $(this).addClass('hidden')
+      text = $(this).parent().find('img.text')
+      text.addClass('hidden')
