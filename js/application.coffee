@@ -40,7 +40,7 @@ $(document).ready ->
   webcamlayer = $('#webcamlayer')
   webcamlayer.click ->
     webcamlayer.addClass('hidden')
-  sayCheese = new SayCheese('#webcam', { snapshots: false });
+  sayCheese = new SayCheese('#webcam', { snapshots: false, width:900 });
   sayCheese.start()
 
 
