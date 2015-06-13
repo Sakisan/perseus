@@ -29,13 +29,14 @@ $(document).ready ->
   applaus = new Audio "audio/Applausss.mp3"
   soundtrack = $('#soundtrack')[0]
   soundtrack.volume -= 0.8
-  # soundtrack.pause()
+  soundtrack.pause()
 
   # interactie
   applause = $('#applause')
   applause.click ->
     applause.addClass('hidden')
     applaus.pause()
+  horse = $('.horse')
   # webcam
   webcamlayer = $('#webcamlayer')
   webcamlayer.click ->
@@ -53,20 +54,23 @@ $(document).ready ->
     text.click ->
       crown = $(this).parent().find('.crown')
       crown.removeClass('hidden')
+      crown.click -> crown.addClass('hidden')
+
+      sword = $(this).parent().find('.sword')
       timeAction = 4000
       reset = ->
-          crown.addClass('hidden')
-          crown.removeClass('transitioning')
-          crown.removeClass('action')
+          sword.addClass('hidden')
+          sword.removeClass('transitioning')
+          sword.removeClass('action')
       resetcycle = ->
           reset()
-          crown.removeClass('hidden')
+          sword.removeClass('hidden')
           setTimeout actioncycle, 1000
       actioncycle = ->
-        crown.addClass('transitioning')
-        crown.addClass('action')
+        sword.addClass('transitioning')
+        sword.addClass('action')
         resetID = setTimeout resetcycle, timeAction
-        crown.click ->
+        sword.click ->
           clearTimeout resetID
           reset()
       setTimeout actioncycle, 200
@@ -90,7 +94,22 @@ $(document).ready ->
         tada.play()
     if medal.hasClass('achievement')
       text.click ->
+        horseVisible = true
         achievement.play()
+        animateHorse = ->
+          if(horseVisible)
+            clone = horse.clone()
+            clone.appendTo(horse.parent())
+            clone.animate({height:"+=75", top:"+=300", left:"+=600"}, 2000, -> clone.remove())
+            clone.click ->
+              $('.horse').addClass('hidden')
+              horse.click()
+              horseVisible = false
+        startAnimateHorse = ->
+          animateHorse()
+          if(horseVisible)
+            settimeout 1000, -> startAnimateHorse()
+        startAnimateHorse()
     if medal.hasClass('game')
       text.click ->
         game.play()
@@ -99,3 +118,6 @@ $(document).ready ->
       text.click ->
         applause.removeClass('hidden')
         applaus.play()
+
+settimeout = (d,f) -> setTimeout f, d
+horseVisible = false
