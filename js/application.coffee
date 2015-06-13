@@ -29,6 +29,7 @@ $(document).ready ->
   applaus = new Audio "audio/Applausss.mp3"
   soundtrack = $('#soundtrack')[0]
   soundtrack.volume -= 0.8
+  # soundtrack.pause()
 
   # interactie
   applause = $('#applause')
@@ -36,18 +37,21 @@ $(document).ready ->
     applause.addClass('hidden')
     applaus.pause()
   # webcam
-  video = $('basic-stream')
-  video.addClass('videostream')
+  webcamlayer = $('#webcamlayer')
+  webcamlayer.click ->
+    webcamlayer.addClass('hidden')
+  sayCheese = new SayCheese('#webcam', { snapshots: false });
+  sayCheese.start()
 
 
   # medals click events
   medal_containers = $('#medals').find('.l-col')
   for medal_container in medal_containers
     # alles
-    medal = $(medal_container).find('img.medal')
-    text = $(medal_container).find('img.text')
+    medal = $(medal_container).find('.medal')
+    text = $(medal_container).find('.text')
     text.click ->
-      crown = $(this).parent().find('img.crown')
+      crown = $(this).parent().find('.crown')
       crown.removeClass('hidden')
       timeAction = 4000
       reset = ->
@@ -67,14 +71,14 @@ $(document).ready ->
           reset()
       setTimeout actioncycle, 200
     medal.hover ->
-      text = $(this).parent().find('img.text')
+      text = $(this).parent().find('.text')
       text.removeClass('hidden')
     text.mouseout ->
       $(this).addClass('hidden')
-    crown  = $(medal_container).find('img.crown')
+    crown  = $(medal_container).find('.crown')
     crown.click ->
       $(this).addClass('hidden')
-      text = $(this).parent().find('img.text')
+      text = $(this).parent().find('.text')
       text.addClass('hidden')
 
     # per medal
@@ -90,6 +94,7 @@ $(document).ready ->
     if medal.hasClass('game')
       text.click ->
         game.play()
+        webcamlayer.removeClass('hidden')
     if medal.hasClass('applause')
       text.click ->
         applause.removeClass('hidden')
