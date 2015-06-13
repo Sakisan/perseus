@@ -26,8 +26,9 @@ $(document).ready ->
   tada = new Audio "audio/177120__rdholder__2dogsound-tadaa1-3s-2013jan31-cc-by-30-us.wav"
   achievement = new Audio "audio/270404__littlerobotsoundfactory__jingle-achievement-00.wav"
   game = new Audio "audio/220184__gameaudio__win-spacey.wav"
-  applaus = new Audio "audio/applausss.mp3"
-  soundtrack = $('#soundtrack')
+  applaus = new Audio "audio/Applausss.mp3"
+  soundtrack = $('#soundtrack')[0]
+  soundtrack.volume -= 0.8
 
   # interactie
   applause = $('#applause')
@@ -48,9 +49,23 @@ $(document).ready ->
     text.click ->
       crown = $(this).parent().find('img.crown')
       crown.removeClass('hidden')
-      remove_goleft = -> crown.removeClass('goleft')
-      add_goleft = -> crown.addClass('goleft')
-      setTimeout add_goleft, 1000
+      timeAction = 4000
+      reset = ->
+          crown.addClass('hidden')
+          crown.removeClass('transitioning')
+          crown.removeClass('action')
+      resetcycle = ->
+          reset()
+          crown.removeClass('hidden')
+          setTimeout actioncycle, 1000
+      actioncycle = ->
+        crown.addClass('transitioning')
+        crown.addClass('action')
+        resetID = setTimeout resetcycle, timeAction
+        crown.click ->
+          clearTimeout resetID
+          reset()
+      setTimeout actioncycle, 200
     medal.hover ->
       text = $(this).parent().find('img.text')
       text.removeClass('hidden')
