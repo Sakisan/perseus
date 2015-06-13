@@ -26,11 +26,18 @@ $(document).ready ->
   tada = new Audio "audio/177120__rdholder__2dogsound-tadaa1-3s-2013jan31-cc-by-30-us.wav"
   achievement = new Audio "audio/270404__littlerobotsoundfactory__jingle-achievement-00.wav"
   game = new Audio "audio/220184__gameaudio__win-spacey.wav"
+  applaus = new Audio "audio/applausss.mp3"
+  soundtrack = $('#soundtrack')
 
   # interactie
   applause = $('#applause')
   applause.click ->
     applause.addClass('hidden')
+    applaus.pause()
+  # webcam
+  video = $('basic-stream')
+  video.addClass('videostream')
+
 
   # medals click events
   medal_containers = $('#medals').find('.l-col')
@@ -44,7 +51,6 @@ $(document).ready ->
       remove_goleft = -> crown.removeClass('goleft')
       add_goleft = -> crown.addClass('goleft')
       setTimeout add_goleft, 1000
-      setTimeout remove_goleft, 4000
     medal.hover ->
       text = $(this).parent().find('img.text')
       text.removeClass('hidden')
@@ -72,3 +78,4 @@ $(document).ready ->
     if medal.hasClass('applause')
       text.click ->
         applause.removeClass('hidden')
+        applaus.play()
